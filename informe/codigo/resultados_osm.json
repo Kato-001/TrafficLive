@@ -1,0 +1,13 @@
+{
+  "nodos": 3517,
+  "aristas_dirigidas": 5435,
+  "rutas": 200,
+  "dijkstra_ms": 4.984438000174123,
+  "a_estrella_ms": 3.418139499699464,
+  "expandidos_dijkstra": 1712.12,
+  "expandidos_a_estrella": 876.73,
+  "recalculo_ms": 3.9311504999932363,
+  "recalculo_max_ms": 19.804600000497885,
+  "tramos_sentido_unico": 4336,
+  "tramos": 4888
+}

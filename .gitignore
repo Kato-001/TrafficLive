@@ -1,0 +1,16 @@
+# Datos personales y documentos de terceros: no se publican
+carta/
+*.pdf
+!informe/Informe_TrafficLive_Final.pdf
+!pagina-web/docs/*.pdf
+!diseno/*.pdf
+informe/Carta-*
+informe/Informe_TrafficLive_Segunda_Presentacion.*
+# Datos descargados (se regeneran con los comandos del README)
+datos_osm/
+datos_fotos/
+# Herramientas locales
+.vercel
+.env*
+__pycache__/
+*.pyc

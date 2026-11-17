@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Banner TrafficLive</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Banner roll-up de 80 × 200 cm */
+  @page { size: 80cm 200cm; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 80cm; height: 200cm; overflow: hidden; font-family: Inter, "Segoe UI", Arial, sans-serif; color: #1d2430;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* el lienzo recorta el motivo de fondo para que el navegador no reduzca la página al imprimir */
+  .lienzo { position: relative; width: 80cm; height: 200cm; overflow: hidden; background: #ffffff; }
+  /* motivo de fondo: anillos de la ciudad */
+  .anillos { position: absolute; left: 50%; top: 88cm; transform: translate(-50%, -50%); width: 150cm; height: 150cm; }
+  .franja-sup { position: absolute; inset: 0 0 auto 0; height: 3cm; background: linear-gradient(90deg, #1f5fa8, #2c7be5); }
+  .numero {
+    position: absolute; top: 7cm; right: 5cm; width: 19cm; padding: 1.4cm 0 1.6cm; border-radius: 2.2cm; text-align: center;
+    background: #1f5fa8; color: #fff; box-shadow: 0 0.4cm 1.2cm rgba(31, 95, 168, .35);
+  }
+  .numero small { display: block; font-size: 1.9cm; font-weight: 700; letter-spacing: .35cm; opacity: .9; }
+  .numero b { display: block; font-size: 10.5cm; line-height: 1; font-weight: 900; letter-spacing: -.3cm; }
+  .logo { position: absolute; left: 50%; top: 88cm; transform: translate(-50%, -50%); width: 62cm; }
+  .titulo {
+    position: absolute; left: 6cm; right: 6cm; top: 136cm; text-align: center;
+    font-size: 3.4cm; line-height: 1.22; font-weight: 700; color: #1d2430;
+  }
+  .titulo span { color: #1f5fa8; }
+  .logos {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 40cm; background: #f4f7fb; border-top: .25cm solid #1f5fa8;
+    display: flex; align-items: center; justify-content: space-evenly; padding: 0 3cm;
+  }
+  .slot { width: 21cm; height: 21cm; display: grid; place-items: center; }
+  .slot img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .slot.vacio { border: .15cm dashed #9aa5b4; border-radius: 1cm; color: #7b8697; font-size: 1.6cm; font-weight: 600; text-align: center; padding: 1cm; }
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <div class="franja-sup"></div>
+  <svg class="anillos" viewBox="0 0 100 100" aria-hidden="true">
+    <g fill="none" stroke="#1f5fa8" stroke-opacity=".06" stroke-width=".6">
+      <circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="42"/>
+      <line x1="50" y1="0" x2="50" y2="100"/><line x1="0" y1="50" x2="100" y2="50"/>
+      <line x1="14.6" y1="14.6" x2="85.4" y2="85.4"/><line x1="85.4" y1="14.6" x2="14.6" y2="85.4"/>
+    </g>
+  </svg>
+
+  <div class="numero"><small>PROYECTO</small><b>55</b></div>
+  <img class="logo" src="logo.svg" alt="Logo TrafficLive">
+  <p class="titulo">Árboles B+ y Grafos Pesados para <span>reportar y evitar atascos</span> en Santa Cruz de la Sierra</p>
+
+  <div class="logos">
+    <div class="slot" data-logo="logos/uagrm.png" data-nombre="Logo UAGRM"></div>
+    <div class="slot" data-logo="logos/ficct.png" data-nombre="Logo FICCT"></div>
+    <div class="slot" data-logo="logos/institucion.png" data-nombre="Logo de la institución de investigación"></div>
+  </div>
+</div>
+
+<script>
+  // Si el archivo del logo existe en la carpeta logos/, se muestra; si no, queda un espacio marcado.
+  document.querySelectorAll(".slot").forEach((s) => {
+    const img = new Image();
+    img.onload = () => s.appendChild(img);
+    img.onerror = () => { s.classList.add("vacio"); s.textContent = s.dataset.nombre; };
+    img.alt = s.dataset.nombre;
+    img.src = s.dataset.logo;
+  });
+</script>
+</body>
+</html>

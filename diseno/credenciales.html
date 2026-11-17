@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Credenciales TrafficLive</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* Hoja carta con 4 credenciales de 9 × 13 cm; las líneas punteadas son guías de corte */
+  @page { size: 21.59cm 27.94cm; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; font-family: Inter, "Segoe UI", Arial, sans-serif; color: #1d2430;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hoja { width: 21.59cm; height: 27.94cm; display: grid; grid-template-columns: 9cm 9cm; grid-template-rows: 13cm 13cm;
+    gap: 0; justify-content: center; align-content: center; page-break-after: always; }
+  .hoja:last-child { page-break-after: auto; }
+  .cred { position: relative; width: 9cm; height: 13cm; outline: 0.3mm dashed #b9c1cc; overflow: hidden; background: #fff; }
+  .cred .sup { height: 4.3cm; background: linear-gradient(160deg, #1f5fa8, #2c7be5); position: relative; }
+  .cred .sup svg.anillos { position: absolute; right: -2.5cm; top: -2.5cm; width: 8cm; height: 8cm; }
+  .cred .num { position: absolute; top: .45cm; right: .45cm; background: #fff; color: #1f5fa8; border-radius: .25cm;
+    padding: .12cm .3cm; font-size: .32cm; font-weight: 800; letter-spacing: .03cm; }
+  .cred .feria { position: absolute; left: .55cm; top: .5cm; color: #fff; font-size: .3cm; font-weight: 700; letter-spacing: .06cm; opacity: .95; }
+  .cred .logo { position: absolute; left: 50%; top: 1.45cm; transform: translateX(-50%); width: 4.6cm; height: 5.9cm;
+    background: #fff; border-radius: .5cm; padding: .25cm .3cm .1cm; box-shadow: 0 .12cm .4cm rgba(16, 24, 40, .18); }
+  .cred .logo img { width: 100%; height: 100%; object-fit: contain; }
+  .cred .datos { position: absolute; left: .5cm; right: .5cm; top: 7.75cm; text-align: center; }
+  .cred .nombre { font-size: .62cm; font-weight: 800; line-height: 1.1; letter-spacing: -.01cm; }
+  .cred .apellido { font-size: .5cm; font-weight: 600; color: #4a5465; margin-top: .08cm; }
+  .cred .carrera { display: inline-block; margin-top: .45cm; padding: .14cm .38cm; border-radius: 1cm; font-size: .34cm; font-weight: 700;
+    background: #e8f0fa; color: #1f5fa8; }
+  .cred .carrera.sistemas { background: #fdf0e3; color: #b45f12; }
+  .cred .pie { position: absolute; left: 0; right: 0; bottom: 0; height: 1.25cm; background: #1d2430; color: #fff;
+    display: flex; align-items: center; justify-content: center; gap: .25cm; font-size: .3cm; font-weight: 600; letter-spacing: .03cm; }
+  .cred .pie i { width: .2cm; height: .2cm; border-radius: 50%; display: inline-block; }
+</style>
+</head>
+<body>
+<div id="hojas"></div>
+<template id="t-cred">
+  <div class="cred">
+    <div class="sup">
+      <svg class="anillos" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="1.6">
+        <circle cx="50" cy="50" r="14"/><circle cx="50" cy="50" r="28"/><circle cx="50" cy="50" r="42"/></g></svg>
+      <span class="num">PROYECTO N° 55</span>
+    </div>
+    <div class="logo"><img src="logo.svg" alt="TrafficLive"></div>
+    <div class="datos">
+      <div class="nombre"></div>
+      <div class="apellido"></div>
+      <div class="carrera"></div>
+    </div>
+    <div class="pie"><i style="background:#d9534f"></i><i style="background:#e9b949"></i><i style="background:#3fb27f"></i>
+      &nbsp;Feria Científica · FICCT – UAGRM</div>
+  </div>
+</template>
+<script>
+  const EQUIPO = [   // nombres, apellidos, carrera
+    ["Sergio", "Estaca Paco", "Ingeniería Informática"],
+    ["Annett Alejandra", "Cruz Rojas", "Ingeniería Informática"],
+    ["Wendy Nicol", "Perez Sandoval", "Ingeniería Informática"],
+    ["Paola Andrea", "Murguia Duran", "Ingeniería en Sistemas"],
+    ["Adria Fernando", "Roca Camacho", "Ingeniería en Sistemas"],
+  ];
+  const t = document.getElementById("t-cred"), cont = document.getElementById("hojas");
+  let hoja;
+  EQUIPO.forEach(([nombre, apellido, carrera], i) => {
+    if (i % 4 === 0) { hoja = document.createElement("div"); hoja.className = "hoja"; cont.appendChild(hoja); }
+    const c = t.content.cloneNode(true);
+    c.querySelector(".nombre").textContent = nombre;
+    c.querySelector(".apellido").textContent = apellido;
+    const ca = c.querySelector(".carrera");
+    ca.textContent = carrera;
+    if (carrera.includes("Sistemas")) ca.classList.add("sistemas");
+    hoja.appendChild(c);
+  });
+</script>
+</body>
+</html>
