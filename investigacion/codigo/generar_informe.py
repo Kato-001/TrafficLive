@@ -17,6 +17,7 @@ FIG = os.path.join(BASE, "..", "figuras")
 RES = json.load(open(os.path.join(BASE, "resultados.json"), encoding="utf-8"))
 PAGINAS = json.load(open(sys.argv[2], encoding="utf-8")) if len(sys.argv) > 2 else {}
 URL_WEB = "https://trafficlive-uagrm.vercel.app"
+REPO = "https://github.com/Kato-001/TrafficLive"
 AZUL = RGBColor(0x1F, 0x3B, 0x63)
 
 doc = Document()
@@ -311,10 +312,10 @@ r = p.add_run("Santa Cruz de la Sierra – Bolivia\nNoviembre de 2026"); r.bold 
 # ======================================================================== ORCID + LOGO
 AUTORES = [   # nombre, carrera, ORCID
     ("Estaca Paco Sergio", "Ingeniería Informática", "0009-0006-5377-8272"),
-    ("Cruz Rojas Annett Alejandra", "Ingeniería Informática", ""),
+    ("Cruz Rojas Annett Alejandra", "Ingeniería Informática", "0009-0001-2285-3261"),
     ("Perez Sandoval Wendy Nicol", "Ingeniería Informática", "0009-0004-3923-5445"),
-    ("Murguia Duran Paola Andrea", "Ingeniería en Sistemas", ""),
-    ("Roca Camacho Adria Fernando", "Ingeniería en Sistemas", ""),
+    ("Murguia Duran Paola Andrea", "Ingeniería en Sistemas", "0009-0005-3107-5886"),
+    ("Roca Camacho Adria Fernando", "Ingeniería en Sistemas", "0009-0006-1540-7462"),
 ]
 
 
@@ -916,7 +917,7 @@ viñetas([
     "**Marcadores** (L.marker) indican el origen y el destino; la ruta de A* se dibuja en azul y la ruta anterior, punteada.",
 ])
 H2("7.6 Interfaz de usuario")
-P(f"El prototipo está publicado en **{URL_WEB}**, con su código en https://github.com/Kato-001/trafficlive, y "
+P(f"El prototipo está publicado en **{URL_WEB}**, con su código en https://github.com/Kato-001/TrafficLive, y "
   "tiene estas secciones principales:", sangria=False)
 viñetas([
     "**Inicio:** resume el proyecto y los resultados medidos (Figura 3).",
@@ -1192,7 +1193,7 @@ tabla(["Observación de la revisión", "Corrección realizada", "Ubicación"],
        ["Indicador de OE5 (KB) sin medir", "Se midieron 5 fotografías reales con el código del prototipo: −98,3 % en promedio", "8.7, Tabla 2"],
        ["Conclusiones 1, 4, 5 y 7 sin datos numéricos o incompletas", "Se añadieron el costo de inserción, los 6,1 µs de BFS, la reducción en KB y el cumplimiento del objetivo general", "Conclusiones"],
        ["Errores de sintaxis en el código y símbolos µs y × perdidos", "Se verificó el PDF original: el código y los símbolos están completos (la pérdida ocurre al convertirlo a texto). Se cambió la fuente del código a Courier New y el «÷» por «/»", "7.3, 7.4, Anexos B y C"],
-       ["Completar los ORCID pendientes", "Pendiente de que tres integrantes registren su identificador", "Página 2"]],
+       ["Completar los ORCID pendientes", "Se completaron los identificadores ORCID de los cinco integrantes", "Página 2"]],
       [5.0, 7.6, 2.9], "Atención a la revisión de noviembre de 2026", tam=9, alinear_num=False)
 H2("Anexo B: Código fuente del Árbol B+")
 P("Archivo arbol_bplus.py (implementación propia, sin bibliotecas externas):", sangria=False)
@@ -1201,7 +1202,7 @@ H2("Anexo C: Código fuente del Grafo Pesado")
 P("Archivo grafo_trafico.py (implementación propia; heapq y deque son de la biblioteca estándar de Python):", sangria=False)
 codigo(open(os.path.join(BASE, "grafo_trafico.py"), encoding="utf-8").read(), 7.5)
 H2("Anexo D: Reproducción de los experimentos")
-P("Los scripts se encuentran en la carpeta informe/codigo del proyecto. Para reproducir los resultados:", sangria=False)
+P(f"Los scripts se encuentran en la carpeta investigacion/codigo del repositorio {REPO}. Para reproducir los resultados:", sangria=False)
 codigo('''python pruebas_correccion.py          # verifica el Árbol B+ y A* contra referencias
 python benchmark.py resultados.json   # mide tiempos (semilla fija = 2026)
 python figuras.py resultados.json ../figuras

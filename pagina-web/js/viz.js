@@ -147,10 +147,10 @@
 (function equipo() {
   const EQUIPO = [   // nombres, apellidos, carrera, ORCID
     ["Sergio", "Estaca Paco", "Ingeniería Informática", "0009-0006-5377-8272"],
-    ["Annett Alejandra", "Cruz Rojas", "Ingeniería Informática", ""],
+    ["Annett Alejandra", "Cruz Rojas", "Ingeniería Informática", "0009-0001-2285-3261"],
     ["Wendy Nicol", "Perez Sandoval", "Ingeniería Informática", "0009-0004-3923-5445"],
-    ["Paola Andrea", "Murguia Duran", "Ingeniería en Sistemas", ""],
-    ["Adria Fernando", "Roca Camacho", "Ingeniería en Sistemas", ""],
+    ["Paola Andrea", "Murguia Duran", "Ingeniería en Sistemas", "0009-0005-3107-5886"],
+    ["Adria Fernando", "Roca Camacho", "Ingeniería en Sistemas", "0009-0006-1540-7462"],
   ];
   const cont = document.getElementById("equipo-lista");
   if (!cont) return;
