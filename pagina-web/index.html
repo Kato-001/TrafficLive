@@ -3,92 +3,105 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TrafficLive · Proyecto 55 · Árboles B+ y Grafos Pesados</title>
-  <meta name="description" content="TrafficLive: Árboles B+ y Grafos Pesados para reportar y evitar atascos en Santa Cruz de la Sierra. Proyecto N° 55 de la Feria Científica FICCT – UAGRM.">
-  <meta property="og:title" content="TrafficLive · Proyecto 55 – FICCT UAGRM">
-  <meta property="og:description" content="Reportes ciudadanos de tráfico con Árboles B+ y rutas en tiempo real con A* sobre la red vial real de Santa Cruz.">
+  <title>TrafficLive · Evita el atasco antes de llegar a él</title>
+  <meta name="description" content="TrafficLive: reportes ciudadanos y rutas que se recalculan en milisegundos sobre la red vial real de Santa Cruz de la Sierra, con Árboles B+ y Grafos Pesados.">
+  <meta property="og:title" content="TrafficLive · Evita el atasco antes de llegar a él">
+  <meta property="og:description" content="Reporta un incidente y mira cómo la ruta se desvía al instante. Árboles B+ y A* sobre la red vial real de Santa Cruz.">
   <meta property="og:image" content="img/logo_trafficlive.png">
+  <meta name="theme-color" content="#070b14">
   <link rel="icon" href="img/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="barra">
-    <a class="marca" href="#inicio"><img src="img/logo.svg" alt="" width="30" height="38">TrafficLive <span class="chip">N° 55</span></a>
+    <a class="marca" href="#inicio" aria-label="TrafficLive, inicio">
+      <svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="#4da3ff" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="#33415c" stroke-width="2"/><path d="M9 31 L13.5 26.5 A9.2 9.2 0 0 1 26.5 13.5 L31 9" fill="none" stroke="#4da3ff" stroke-width="3.2" stroke-linecap="round"/><circle cx="23" cy="17" r="3" fill="#ff5d5d"/><circle cx="9" cy="31" r="3" fill="#3ddc97"/></svg>
+      <span>Traffic<b>Live</b></span>
+    </a>
     <nav aria-label="Secciones">
-      <a href="#problema">Problema</a>
-      <a href="#demo">Demo</a>
-      <a href="#arbol">Árbol B+</a>
+      <a href="#problema">El problema</a>
+      <a href="#demo">Mapa en vivo</a>
+      <a href="#como">Cómo funciona</a>
       <a href="#resultados">Resultados</a>
-      <a href="#metodo">Metodología</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#descargas" class="cta-nav">Descargas</a>
     </nav>
+    <a class="btn primario chico" href="#demo">Abrir el mapa</a>
   </header>
 
   <main>
     <section id="inicio" class="hero">
       <div class="contenedor hero-grid">
-        <div>
-          <p class="eyebrow">Proyecto N° 55 · Feria Científica FICCT – UAGRM · Estructura de Datos 2</p>
-          <h1>Árboles B+ y Grafos Pesados para <span>reportar y evitar atascos</span> en Santa Cruz de la Sierra</h1>
-          <p class="lead">Los ciudadanos reportan incidentes con foto. Un <b>Árbol B+ con doble índice</b> guarda el historial
-            y lo consulta por identificador o por rango de horas. La red vial real de la ciudad, tomada de OpenStreetMap,
-            se modela como un <b>grafo pesado dirigido</b>, y <b>A*</b> recalcula tu ruta en milisegundos cuando una calle se congestiona.</p>
+        <div class="hero-texto">
+          <p class="eyebrow"><span class="vivo"></span> Santa Cruz de la Sierra · red vial real</p>
+          <h1>Evita el atasco <span>antes de llegar a él.</span></h1>
+          <p class="lead">Un vecino reporta un accidente con una foto. En milisegundos, TrafficLive lo guarda,
+            sube el costo de esa calle y <b>desvía tu ruta</b> por el mejor camino disponible.</p>
           <div class="cta">
-            <a class="btn primario" href="#demo">Probar la demo</a>
-            <a class="btn" href="https://github.com/Kato-001/TrafficLive/raw/main/documentos/05_informe_final/Informe_TrafficLive_Final.pdf">Descargar informe (PDF)</a>
-            <a class="btn ghost" href="https://github.com/Kato-001/TrafficLive" target="_blank" rel="noopener">Código en GitHub ↗</a>
+            <a class="btn primario" href="#demo">Probar el mapa en vivo <span aria-hidden="true">→</span></a>
+            <a class="btn" href="#como">Ver cómo funciona</a>
           </div>
+          <dl class="hero-kpis">
+            <div><dd>&lt; 20 ms</dd><dt>para recalcular una ruta</dt></div>
+            <div><dd>×119</dd><dt>más rápido al consultar el historial</dt></div>
+            <div><dd>−98 %</dd><dt>de peso en cada foto</dt></div>
+          </dl>
         </div>
-        <div class="hero-logo"><img src="img/logo.svg" alt="Logo de TrafficLive" width="420" height="540"></div>
-      </div>
-      <div class="contenedor">
-        <dl class="kpis">
-          <div><dt>Búsqueda por ID</dt><dd>×1.522</dd><small>Árbol B+ frente a una lista enlazada, con 100.000 reportes</small></div>
-          <div><dt>Búsqueda por rango</dt><dd>×119</dd><small>en "reportes de la última hora"</small></div>
-          <div><dt>A* en la red real</dt><dd>−49 %</dd><small>nodos explorados frente a Dijkstra, con la misma ruta óptima</small></div>
-          <div><dt>Recálculo de ruta</dt><dd>&lt; 20 ms</dd><small>peor caso medido en la red real de Santa Cruz</small></div>
-          <div><dt>Fotos comprimidas</dt><dd>−98 %</dd><small>de 3,5 MB a 58 KB en promedio, dentro del celular</small></div>
-        </dl>
+        <div class="hero-arte" aria-hidden="true">
+          <svg viewBox="0 0 600 600">
+            <defs><radialGradient id="halo"><stop offset="0" stop-color="#4da3ff" stop-opacity=".22"/><stop offset="1" stop-color="#4da3ff" stop-opacity="0"/></radialGradient></defs>
+            <circle cx="300" cy="300" r="300" fill="url(#halo)"/>
+            <g fill="none" stroke="#24324d" stroke-width="5" stroke-linecap="round">
+              <circle cx="300" cy="300" r="90"/><circle cx="300" cy="300" r="170"/><circle cx="300" cy="300" r="250"/>
+              <path d="M300 50V550M50 300H550M123 123L477 477M477 123L123 477"/>
+            </g>
+            <path d="M215 385 L385 215" fill="none" stroke="#ff5d5d" stroke-width="7" stroke-linecap="round" stroke-dasharray="4 16"/>
+            <path class="ruta" d="M123 477 L180 420 A170 170 0 0 1 420 180 L477 123" fill="none" stroke="#4da3ff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+            <circle class="pulso" cx="330" cy="270" r="16" fill="#ff5d5d"/>
+            <circle cx="330" cy="270" r="11" fill="#ff5d5d" stroke="#070b14" stroke-width="4"/>
+            <circle cx="123" cy="477" r="14" fill="#3ddc97" stroke="#070b14" stroke-width="5"/>
+            <circle cx="477" cy="123" r="14" fill="#4da3ff" stroke="#070b14" stroke-width="5"/>
+          </svg>
+          <div class="burbuja b1"><i style="background:#ff5d5d"></i>Accidente reportado · 2do Anillo</div>
+          <div class="burbuja b2"><i style="background:#4da3ff"></i>Ruta recalculada con A*</div>
+        </div>
       </div>
     </section>
 
     <section id="problema" class="seccion">
       <div class="contenedor">
-        <p class="seccion-tag">01 · El problema</p>
-        <h2>Una ciudad de anillos que crece más rápido que sus calles</h2>
-        <p class="sub">En una red radio-concéntrica, un accidente en un anillo no se queda ahí: la congestión se desborda hacia las
-          radiales y los anillos vecinos. Por eso TrafficLive propaga cada reporte por el grafo con BFS.</p>
+        <p class="seccion-tag">El problema</p>
+        <h2>Una ciudad de anillos donde un solo choque lo traba todo</h2>
+        <p class="sub">Santa Cruz crece en anillos y radiales. Cuando un tramo se satura, la cola se desborda a las calles vecinas
+          y los desvíos son de kilómetros. Las apps de navegación no guardan un historial abierto de incidentes ni dejan que la comunidad los confirme con fotos.</p>
         <div class="tarjetas">
-          <article><b>1.606.671</b><span>habitantes en el municipio de Santa Cruz de la Sierra (Censo 2024, INE)</span></article>
-          <article><b>973.537</b><span>vehículos en el departamento a fines de 2025: el 36,4 % del total nacional (INE/RUAT)</span></article>
-          <article><b>+11,5 %</b><span>crecimiento del parque automotor departamental entre 2022 y 2025</span></article>
-          <article><b>0,5 – 1,1 %</b><span>del PIB local se pierde por congestión en ciudades latinoamericanas (BID, 2021)</span></article>
+          <article><b>1,6 M</b><span>de habitantes en el municipio (Censo 2024)</span></article>
+          <article><b>973.537</b><span>vehículos en el departamento: el 36,4 % del país (INE/RUAT, 2025)</span></article>
+          <article><b>+11,5 %</b><span>más vehículos entre 2022 y 2025</span></article>
+          <article><b>hasta 1,1 %</b><span>del PIB local se pierde por congestión en ciudades de la región (BID, 2021)</span></article>
         </div>
       </div>
     </section>
 
     <section id="demo" class="seccion alt">
-      <div class="contenedor">
-        <p class="seccion-tag">02 · Demo en vivo</p>
-        <h2>La red vial real de Santa Cruz, como grafo dirigido</h2>
-        <p class="sub">Son las avenidas principales de OpenStreetMap: <b id="st-red">cargando…</b>. Las vías de un solo sentido y los carriles
-          separados de los anillos son aristas dirigidas. Pasa el cursor sobre una calle para ver su peso.</p>
+      <div class="contenedor ancho">
+        <p class="seccion-tag">Mapa en vivo</p>
+        <h2>Bloquea una calle y mira cómo se desvía la ruta</h2>
+        <p class="sub">Estas son las avenidas reales de Santa Cruz, tomadas de OpenStreetMap: <b id="st-red">cargando…</b>.
+          Cada sentido de circulación es una arista con su propio tiempo de viaje.</p>
         <div class="demo">
           <div class="mapa-wrap">
-            <div id="mapa" role="application" aria-label="Mapa de Santa Cruz con el grafo vial"></div>
+            <div id="mapa" role="application" aria-label="Mapa de Santa Cruz con la red vial"></div>
             <p id="ayuda" class="ayuda"></p>
-            <div class="leyenda"><span><i style="background:#1f5fa8"></i>ruta A*</span><span><i class="dash"></i>ruta anterior</span>
-              <span><i style="background:#e9a23b"></i>congestión</span><span><i style="background:#d9534f"></i>severa</span>
-              <span><i class="calor"></i>mapa de calor (BFS)</span></div>
+            <div class="leyenda"><span><i style="background:#4da3ff"></i>ruta actual</span><span><i class="dash"></i>ruta anterior</span>
+              <span><i style="background:#ffa94d"></i>congestión</span><span><i style="background:#ff5d5d"></i>severa</span>
+              <span><i class="calor"></i>mapa de calor</span></div>
           </div>
           <aside class="panel">
             <div class="modos" role="tablist">
-              <button data-modo="ruta" class="activo">1 · Calcular ruta</button>
-              <button data-modo="reporte">2 · Reportar incidente</button>
+              <button data-modo="ruta" class="activo">Calcular ruta</button>
+              <button data-modo="reporte">Reportar incidente</button>
             </div>
             <div id="panel-reporte" class="bloque" hidden>
               <label>Tipo de incidente
@@ -97,39 +110,41 @@
                   <option value="atasco_moderado">Atasco moderado (+5 min)</option>
                   <option value="atasco_severo" selected>Atasco severo (+10 min)</option>
                   <option value="accidente">Accidente (+15 min)</option>
-                  <option value="bloqueo">Calle bloqueada (∞)</option>
+                  <option value="bloqueo">Calle bloqueada</option>
                 </select>
               </label>
-              <label class="check"><input type="checkbox" id="bidireccional"> Afecta ambos sentidos de circulación</label>
-              <label>Foto (opcional, se comprime en tu navegador)
+              <label class="check"><input type="checkbox" id="bidireccional"> Afecta ambos sentidos</label>
+              <label>Foto (opcional, se comprime en tu teléfono)
                 <input type="file" id="foto" accept="image/*" capture="environment">
               </label>
               <small id="foto-info" class="muted"></small>
             </div>
-            <div class="stats">
+            <div class="viaje">
               <div><span>Tiempo estimado</span><b id="st-costo">—</b></div>
               <div><span>Distancia</span><b id="st-km">—</b></div>
-              <div><span>Árbol B+ (h)</span><b id="st-arbol">—</b></div>
+            </div>
+            <p class="calles"><span id="st-calles">—</span></p>
+            <button id="btn-bloquear" class="btn primario bloque-btn">Bloquear una calle de mi ruta</button>
+            <button id="btn-limpiar" class="btn bloque-btn">Limpiar reportes</button>
+            <div class="stats">
+              <div><span>Cálculo A*</span><b id="st-ms">—</b></div>
               <div><span>Nodos A*</span><b id="st-astar">—</b></div>
               <div><span>Nodos Dijkstra</span><b id="st-dijkstra">—</b></div>
-              <div><span>Cálculo A*</span><b id="st-ms">—</b></div>
-            </div>
-            <p class="calles"><span>Recorrido:</span> <span id="st-calles">—</span></p>
-            <div class="acciones">
-              <button id="btn-bloquear" class="btn primario">Modo feria: bloquear una calle de mi ruta</button>
-              <button id="btn-limpiar" class="btn">Limpiar reportes</button>
+              <div><span>Árbol B+ · altura</span><b id="st-arbol">—</b></div>
             </div>
             <h3>Actividad</h3>
-            <ul id="log" class="log"><li>Haz un reporte para ver cómo se actualizan el Árbol B+ y el grafo.</li></ul>
-            <h3>Reportes activos · validación comunitaria</h3>
+            <ul id="log" class="log"><li>Haz un reporte para ver qué pasa por dentro.</li></ul>
+            <h3>Reportes activos</h3>
             <ul id="lista-reportes" class="reportes"></ul>
-            <small class="muted">Con 3 votos o más: si más del 70 % desmiente, el reporte deja de afectar al grafo; si más del 70 % confirma, su penalización sube un 50 %.</small>
+            <small class="muted">La comunidad vota cada reporte. Con 3 votos o más, si el 70 % lo desmiente deja de afectar las rutas; si el 70 % lo confirma, pesa un 50 % más.</small>
           </aside>
         </div>
 
-        <div class="rango bloque">
-          <h3>Consulta por rango sobre el índice temporal del Árbol B+</h3>
-          <p class="muted">Historial simulado del día con 400 reportes, con más carga en las horas pico. La clave es (minuto del día, id); un segundo Árbol B+ indexa por id.</p>
+        <div class="rango">
+          <div>
+            <h3>¿Qué pasó entre las 7 y las 8?</h3>
+            <p class="muted">Consulta el historial del día por franja horaria. El Árbol B+ baja una sola vez y recorre sus hojas enlazadas.</p>
+          </div>
           <div class="fila">
             <label>Desde <input type="time" id="desde" value="07:00"></label>
             <label>Hasta <input type="time" id="hasta" value="08:00"></label>
@@ -140,116 +155,78 @@
       </div>
     </section>
 
-    <section id="arbol" class="seccion">
+    <section id="como" class="seccion">
       <div class="contenedor">
-        <p class="seccion-tag">03 · Cómo funciona</p>
-        <h2>El Árbol B+, paso a paso</h2>
-        <p class="sub">Los nodos internos solo guían la búsqueda. Los datos viven en las hojas, y las hojas están enlazadas: una consulta
-          por rango baja una sola vez, en O(log n), y luego avanza de hoja en hoja, en O(k), sin volver a subir.</p>
-        <div class="bp-controles">
-          <label>Orden M <select id="bp-orden"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
-          <input id="bp-valor" type="number" min="1" max="999" placeholder="clave" aria-label="Clave a insertar">
-          <button id="bp-insertar" class="btn primario">Insertar</button>
-          <button id="bp-aleatorio" class="btn">Insertar aleatoria</button>
-          <span class="sep-v"></span>
-          <input id="bp-a" type="number" value="10" aria-label="Inicio del rango">
-          <input id="bp-b" type="number" value="30" aria-label="Fin del rango">
-          <button id="bp-rango" class="btn">Buscar rango</button>
-          <button id="bp-reiniciar" class="btn ghost">Reiniciar</button>
+        <p class="seccion-tag">Cómo funciona</p>
+        <h2>Del reporte al desvío, en tres pasos</h2>
+        <div class="pasos">
+          <article><em>01</em><h3>Un vecino reporta</h3><p>Elige el tipo de incidente, toca la calle y adjunta una foto. La foto se comprime en el teléfono antes de enviarse.</p></article>
+          <article><em>02</em><h3>El Árbol B+ lo guarda</h3><p>El reporte entra en dos índices: por identificador y por hora. Así se puede buscar uno solo o todos los de una franja horaria.</p></article>
+          <article><em>03</em><h3>A* recalcula la ruta</h3><p>La calle afectada sube de costo en el grafo y la ruta se desvía. La congestión se propaga a las calles vecinas en el mapa de calor.</p></article>
         </div>
-        <div class="bp-lienzo"><svg id="bp-svg" role="img" aria-label="Diagrama del Árbol B+"></svg></div>
-        <p id="bp-info" class="bp-info"></p>
+
+        <div id="arbol" class="arbol">
+          <h3>Mira el Árbol B+ por dentro</h3>
+          <p class="sub">Inserta claves o busca un rango. El camino de bajada se marca en rojo y las hojas recorridas, en naranja.</p>
+          <div class="bp-controles">
+            <label>Orden M <select id="bp-orden"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+            <input id="bp-valor" type="number" min="1" max="999" placeholder="clave" aria-label="Clave a insertar">
+            <button id="bp-insertar" class="btn primario">Insertar</button>
+            <button id="bp-aleatorio" class="btn">Aleatoria</button>
+            <span class="sep-v"></span>
+            <input id="bp-a" type="number" value="10" aria-label="Inicio del rango">
+            <input id="bp-b" type="number" value="30" aria-label="Fin del rango">
+            <button id="bp-rango" class="btn">Buscar rango</button>
+            <button id="bp-reiniciar" class="btn ghost">Reiniciar</button>
+          </div>
+          <div class="bp-lienzo"><svg id="bp-svg" role="img" aria-label="Diagrama del Árbol B+"></svg></div>
+          <p id="bp-info" class="bp-info"></p>
+        </div>
       </div>
     </section>
 
     <section id="resultados" class="seccion alt">
       <div class="contenedor">
-        <p class="seccion-tag">04 · Resultados medidos</p>
-        <h2>Lo que dicen los números</h2>
-        <p class="sub">Benchmark reproducible, con semilla fija y estructuras implementadas desde cero en Python. Los ejes de los gráficos del Árbol B+ son logarítmicos.</p>
+        <p class="seccion-tag">Resultados</p>
+        <h2>Medido, no prometido</h2>
+        <p class="sub">Todo se midió con estructuras programadas desde cero y pruebas reproducibles, sobre datos sintéticos y sobre la red real de la ciudad.</p>
+        <dl class="kpis">
+          <div><dd>×1.522</dd><dt>Buscar un reporte por ID, frente a una lista enlazada (100.000 reportes)</dt></div>
+          <div><dd>×119</dd><dt>Consultar los reportes de una hora</dt></div>
+          <div><dd>−49 %</dd><dt>Intersecciones exploradas por A* frente a Dijkstra, con la misma ruta</dt></div>
+          <div><dd>19,8 ms</dd><dt>El recálculo más lento en la red real</dt></div>
+        </dl>
         <div class="graficos">
-          <figure><figcaption>Búsqueda de un reporte por ID</figcaption><div class="ch"><canvas id="ch-id"></canvas></div></figure>
-          <figure><figcaption>Búsqueda por rango de 1 hora</figcaption><div class="ch"><canvas id="ch-rango"></canvas></div></figure>
-          <figure><figcaption>Tiempo de cálculo de una ruta</figcaption><div class="ch"><canvas id="ch-ruta"></canvas></div></figure>
-          <figure><figcaption>Nodos expandidos por búsqueda</figcaption><div class="ch"><canvas id="ch-exp"></canvas></div></figure>
+          <figure><figcaption>Buscar un reporte por ID</figcaption><div class="ch"><canvas id="ch-id"></canvas></div></figure>
+          <figure><figcaption>Consultar una hora de reportes</figcaption><div class="ch"><canvas id="ch-rango"></canvas></div></figure>
+          <figure><figcaption>Tiempo para calcular una ruta</figcaption><div class="ch"><canvas id="ch-ruta"></canvas></div></figure>
+          <figure><figcaption>Intersecciones exploradas</figcaption><div class="ch"><canvas id="ch-exp"></canvas></div></figure>
         </div>
         <div class="dos-col">
           <article class="tabla-card">
-            <h3>Cuadrícula sintética frente a red real</h3>
+            <h3>Cuadrícula de prueba frente a la red real</h3>
             <table id="tb-osm"></table>
-            <p class="muted">La red real (OpenStreetMap) es dirigida: el 89 % de sus tramos son de un solo sentido. Promedio de 200 rutas.</p>
           </article>
           <article class="tabla-card">
-            <h3>Compresión de fotos en el cliente</h3>
+            <h3>Fotos comprimidas en el teléfono</h3>
             <table id="tb-fotos"></table>
-            <p class="muted">5 fotos reales de calles cruceñas (Wikimedia Commons). Lado mayor de 800 px y JPEG con calidad 0,7, medido en el navegador.</p>
           </article>
-        </div>
-        <div class="hipotesis">
-          <article><b>H1 · Árbol B+</b><p>Con 100.000 reportes, la consulta por rango es al menos 10 veces más rápida que en la lista enlazada.
-            <span>Medido: ×119 → <strong>se acepta</strong></span></p></article>
-          <article><b>H2 · A*</b><p>A* encuentra la misma ruta que Dijkstra explorando al menos un 30 % menos de nodos.
-            <span>Medido: −48 a −51 % (cuadrícula) y −49 % (red real) → <strong>se acepta</strong></span></p></article>
-          <article><b>H3 · Tiempo real</b><p>El recálculo tras un reporte tarda menos de 100 ms.
-            <span>Medido: 17,4 ms (10.000 nodos) y 19,8 ms (red real) → <strong>se acepta</strong></span></p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="metodo" class="seccion">
-      <div class="contenedor">
-        <p class="seccion-tag">05 · Metodología</p>
-        <h2>Investigación aplicada con diseño experimental</h2>
-        <div class="metodo">
-          <div>
-            <p>Enfoque cuantitativo. La lista enlazada y Dijkstra son el grupo de control; el Árbol B+ y A* son el tratamiento.
-              Las hipótesis tienen umbrales fijados antes de medir.</p>
-            <ul>
-              <li><b>Independientes:</b> la estructura de indexación, el algoritmo y el tamaño de la entrada.</li>
-              <li><b>Dependientes:</b> el tiempo por consulta, los nodos expandidos, el tiempo de recálculo y el tamaño de la imagen.</li>
-              <li><b>Muestra:</b> de 1.000 a 100.000 reportes, grafos de 100 a 10.000 nodos, la red real de 3.517 intersecciones y 5 fotos.</li>
-              <li><b>Validación:</b> 20.000 operaciones del Árbol B+ contrastadas con un diccionario en 5 órdenes, y A* frente a Dijkstra en todas las rutas.</li>
-            </ul>
-            <h3>Construido con software y datos abiertos</h3>
-            <div class="stack">
-              <span>OpenStreetMap · Overpass API</span><span>Leaflet 1.9.4</span><span>Leaflet.heat</span><span>Chart.js 4.4.1</span>
-              <span>Puppeteer</span><span>Python 3.14</span><span>Wikimedia Commons</span><span>Vercel</span>
-            </div>
-          </div>
-          <figure class="figura">
-            <img src="img/fig_arquitectura.png" alt="Diagrama de arquitectura de TrafficLive">
-            <figcaption>Arquitectura del sistema. El prototipo ejecuta el núcleo en el navegador; el servidor Flask, la base de datos y el almacenamiento en la nube corresponden a la versión de producción.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="equipo" class="seccion alt">
-      <div class="contenedor">
-        <p class="seccion-tag">06 · Equipo</p>
-        <h2>Autores del proyecto</h2>
-        <div class="equipo" id="equipo-lista"></div>
-        <p class="docente">Docente tutor: <b>Ing. MSc. Juan Carlos Peinado Pereira</b> · Estructura de Datos 2 · FICCT – UAGRM</p>
-      </div>
-    </section>
-
-    <section id="descargas" class="seccion">
-      <div class="contenedor">
-        <p class="seccion-tag">07 · Descargas</p>
-        <h2>Documentos y código</h2>
-        <div class="descargas">
-          <a href="https://github.com/Kato-001/TrafficLive/raw/main/documentos/05_informe_final/Informe_TrafficLive_Final.pdf"><b>Informe final</b><span>PDF · formato APA 7 · en GitHub</span></a>
-          <a href="https://github.com/Kato-001/TrafficLive" target="_blank" rel="noopener"><b>Repositorio</b><span>Código, benchmark e informes de cada revisión</span></a>
-          <a href="img/logo_trafficlive.png" download><b>Logo</b><span>PNG con fondo transparente</span></a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="pie">
-    <div class="contenedor">
-      <p><b>TrafficLive</b> · Proyecto N° 55 · Universidad Autónoma Gabriel René Moreno · Facultad de Ingeniería en Ciencias de la Computación y Telecomunicaciones</p>
-      <p class="muted">Datos viales y mapa base © colaboradores de OpenStreetMap (ODbL) · Fuentes: INE/RUAT (2025), Censo 2024, Calatayud et al. (BID, 2021).</p>
+    <div class="contenedor pie-grid">
+      <div>
+        <a class="marca" href="#inicio"><span>Traffic<b>Live</b></span></a>
+        <p>Proyecto N° 55 · Feria Facultativa FICCT 2-2026 · UAGRM · Estructura de Datos 2</p>
+      </div>
+      <div class="pie-links">
+        <a href="https://github.com/Kato-001/TrafficLive/raw/main/documentos/05_informe_final/Informe_TrafficLive_Final.pdf">Informe final (PDF)</a>
+        <a href="https://github.com/Kato-001/TrafficLive" target="_blank" rel="noopener">Código en GitHub ↗</a>
+      </div>
+      <p class="muted creditos">Datos viales y mapa © colaboradores de OpenStreetMap (ODbL). Hecho con Leaflet, Leaflet.heat y Chart.js.</p>
     </div>
   </footer>
 

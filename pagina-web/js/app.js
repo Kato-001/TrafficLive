@@ -159,7 +159,7 @@ function colorTramo(t) {
   const es = porTramo[t.id];
   const r = Math.max(...es.map((e) => e.peso / e.base));
   if (!isFinite(r)) return ["#5b2333", 5, 0.95];
-  return r < 1.15 ? ["#8794a8", 2, 0.45] : r < 2 ? ["#e9a23b", 4.5, 0.95] : ["#d9534f", 5, 0.95];
+  return r < 1.15 ? ["#6f7f9e", 2, 0.55] : r < 2 ? ["#e9a23b", 4.5, 0.95] : ["#d9534f", 5, 0.95];
 }
 function pintarCalles() {
   tramos.forEach((t, i) => { const [c, w, o] = colorTramo(t); lineas[i].setStyle({ color: c, weight: w, opacity: o }); });
@@ -193,11 +193,11 @@ function dibujarRuta(guardarAnterior) {
   const tA = performance.now() - t0;
   const d = caminoMinimo(origen, destino, false);
   if (guardarAnterior && rutaAnterior)
-    rutaAnterior.forEach((e) => L.polyline(puntosArista(e), { color: "#1d2430", weight: 4, opacity: 0.5, dashArray: "4 8", renderer: lienzo }).addTo(capaRuta));
-  a.aristas.forEach((e) => L.polyline(puntosArista(e), { color: "#1f5fa8", weight: 7, opacity: 0.92, renderer: lienzo }).addTo(capaRuta));
+    rutaAnterior.forEach((e) => L.polyline(puntosArista(e), { color: "#e6edf7", weight: 3, opacity: 0.7, dashArray: "4 8", renderer: lienzo }).addTo(capaRuta));
+  a.aristas.forEach((e) => L.polyline(puntosArista(e), { color: "#4da3ff", weight: 7, opacity: 0.95, renderer: lienzo }).addTo(capaRuta));
   capaMarcas.clearLayers();
   L.marker(nodos[origen], { icon: iconoPin("A", "#1f8a4c") }).addTo(capaMarcas);
-  L.marker(nodos[destino], { icon: iconoPin("B", "#1f5fa8") }).addTo(capaMarcas);
+  L.marker(nodos[destino], { icon: iconoPin("B", "#1f6feb") }).addTo(capaMarcas);
   rutaAnterior = a.aristas;
   a.ms = tA;
   const km = a.aristas.reduce((s, e) => s + tramos[e.tramo].km, 0);
@@ -351,7 +351,7 @@ function iniciarInteraccion() {
 // ------------------------------------------------------------------ arranque
 fetch("data/red_santa_cruz.json").then((r) => r.json()).then((red) => {
   cargarRed(red);
-  lineas = tramos.map((t) => L.polyline(t.puntos, { color: "#8794a8", weight: 2, opacity: 0.45, renderer: lienzo })
+  lineas = tramos.map((t) => L.polyline(t.puntos, { color: "#6f7f9e", weight: 2, opacity: 0.55, renderer: lienzo })
     .bindTooltip(() => {
       const es = porTramo[t.id];
       const pesos = es.map((e) => (isFinite(e.peso) ? e.peso.toFixed(2) + " min" : "bloqueada")).join(" / ");

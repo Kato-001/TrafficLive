@@ -920,7 +920,7 @@ H2("7.6 Interfaz de usuario")
 P(f"El prototipo está publicado en **{URL_WEB}**, con su código en https://github.com/Kato-001/TrafficLive, y "
   "tiene estas secciones principales:", sangria=False)
 viñetas([
-    "**Inicio:** resume el proyecto y los resultados medidos (Figura 3).",
+    "**Inicio:** presenta el problema que resuelve la aplicación y sus resultados principales (Figura 3).",
     "**Demo interactiva:** mapa con la red vial real de Santa Cruz como grafo dirigido. El usuario elige origen y destino, "
     "indica si el incidente afecta uno o ambos sentidos, reporta incidentes "
     "(opcionalmente con foto, que se comprime en el navegador) y vota los reportes de otros. El botón «Modo feria» bloquea un "
@@ -930,7 +930,6 @@ viñetas([
     "camino de descenso y las hojas recorridas (Figura 5).",
     "**Resultados:** gráficos interactivos del benchmark, comparación entre la cuadrícula y la red real, tabla de "
     "compresión de fotos y contraste de hipótesis.",
-    "**Equipo y descargas:** autores con su carrera e identificador ORCID, el informe en PDF, el repositorio y el logo.",
 ])
 figura("cap_inicio.png", "Pantalla de inicio del prototipo web", 15.5, f"Captura de {URL_WEB}.")
 figura("cap_demo_recalculo.png", "Demo interactiva sobre la red real: recálculo de ruta tras bloquear un tramo («Modo feria»)", 15.5,
@@ -1221,7 +1220,6 @@ numerada([
 ])
 H2("Anexo F: Capturas de pantalla adicionales")
 figura("cap_resultados.png", "Sección de resultados del prototipo web", 15, f"Captura de {URL_WEB}.")
-figura("cap_equipo.png", "Sección del equipo con carreras e identificadores ORCID", 15, f"Captura de {URL_WEB}.")
 
 # ======================================================================== índice estático
 def llenar_indice():

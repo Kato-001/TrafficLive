@@ -93,7 +93,7 @@
   if (!window.Chart || !window.RESULTADOS) return;
   const css = getComputedStyle(document.documentElement);
   const tinta = css.getPropertyValue("--tinta-2").trim(), grid = css.getPropertyValue("--linea").trim();
-  const AZUL = "#1f5fa8", NAR = "#e07a1f";
+  const AZUL = "#4da3ff", NAR = "#ffa94d";
   Chart.defaults.font.family = "Inter, system-ui, sans-serif";
   Chart.defaults.color = tinta;
   const R = RESULTADOS.reportes, G = RESULTADOS.grafo;
